@@ -11,4 +11,4 @@
 3. `cd akai-spring`
 4. `mvn spring-boot:run`
 
-To test application go to `http://localhost:5000/swagger-ui.html`
+To test application go to `http://****localhost:5000/swagger-ui.html`
