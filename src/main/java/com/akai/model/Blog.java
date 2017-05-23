@@ -1,24 +1,35 @@
 package com.akai.model;
 
+import org.apache.jackrabbit.ocm.mapper.impl.annotation.Field;
+import org.apache.jackrabbit.ocm.mapper.impl.annotation.Node;
+
 import java.util.Date;
 
 /**
  * Created by martwy_kotek on 23.05.2017.
  */
+@Node
 public class Blog {
 
-    private Long id;
+
+    @Field(path=true)
+    private String path;
+    @Field
     private String title;
+    @Field
     private String author;
+    @Field
     private Date date;
+    @Field
     private String content;
 
-    public Long getId() {
-        return id;
+    public String getPath() {
+
+        return path;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getTitle() {
