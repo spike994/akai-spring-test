@@ -12,7 +12,7 @@ import java.util.Date;
 public class Blog {
 
 
-    @Field(path=true)
+    @Field(path = true)
     private String path;
     @Field
     private String title;

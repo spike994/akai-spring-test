@@ -18,6 +18,7 @@ import java.util.List;
 public class BlogRepositoryImpl implements BlogRepository {
     public static final String CONTENT_BLOGS_NODE = "/content/blogs/";
     public static final String CONTENT_NODE = "content";
+
     @Autowired
     Session session;
 
@@ -37,17 +38,7 @@ public class BlogRepositoryImpl implements BlogRepository {
         }
     }
 
-    public void addCategory(String categoryName) {
-        try {
-            Node blogsNode = session.getRootNode().getNode(CONTENT_BLOGS_NODE);
-            blogsNode.addNode(categoryName);
-            session.save();
-        } catch (RepositoryException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void clearContent() {
+    private void clearContent() {
         try {
             Node rootNode = session.getRootNode();
             Node contentNode = rootNode.getNode(CONTENT_NODE);
@@ -58,7 +49,6 @@ public class BlogRepositoryImpl implements BlogRepository {
         }
     }
 
-    //Remember to switch spaces to underscore
     public void addBlog(Blog blog) {
         blog.setPath(CONTENT_BLOGS_NODE + blog.getPath());
         objectContentManager.insert(blog);
@@ -72,11 +62,10 @@ public class BlogRepositoryImpl implements BlogRepository {
 
     public List<Blog> getAll() {
         List<Blog> blogs  = null;
-        List nodess = new ArrayList<>();
         try {
             Iterator nodes = session.getNode(CONTENT_BLOGS_NODE).getNodes();
             while (nodes.hasNext()){
-                nodess.add(nodes.next());
+                blogs.add((Blog)nodes.next());
             }
         } catch (RepositoryException e) {
             e.printStackTrace();
@@ -92,6 +81,7 @@ public class BlogRepositoryImpl implements BlogRepository {
 
     @Override
     public void updateBlog(Blog blog) {
+        blog.setPath(CONTENT_BLOGS_NODE + blog.getPath());
         objectContentManager.update(blog);
         objectContentManager.save();
     }

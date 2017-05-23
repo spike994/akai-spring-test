@@ -16,9 +16,7 @@ import javax.jcr.SimpleCredentials;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by martwy_kotek on 23.05.2017.
- */
+
 @Configuration
 public class JcrConfig {
 
