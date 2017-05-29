@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.ArrayList;
@@ -61,11 +62,11 @@ public class BlogRepositoryImpl implements BlogRepository {
     }
 
     public List<Blog> getAll() {
-        List<Blog> blogs  = null;
+        List<Blog> blogs  = new ArrayList<>();
         try {
-            Iterator nodes = session.getNode(CONTENT_BLOGS_NODE).getNodes();
+            NodeIterator nodes = session.getNode(CONTENT_BLOGS_NODE).getNodes();
             while (nodes.hasNext()){
-                blogs.add((Blog)nodes.next());
+                blogs.add(getBlog(nodes.nextNode().getName()));
             }
         } catch (RepositoryException e) {
             e.printStackTrace();
